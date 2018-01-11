@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidLearning.iml" filepath="$PROJECT_DIR$/AndroidLearning.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/runtimepermission/runtimepermission.iml" filepath="$PROJECT_DIR$/runtimepermission/runtimepermission.iml" />
     </modules>
   </component>
 </project>
