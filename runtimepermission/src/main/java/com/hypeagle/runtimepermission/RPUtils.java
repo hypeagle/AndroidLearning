@@ -1,4 +1,4 @@
-package com.example.runtimepermission;
+package com.hypeagle.runtimepermission;
 
 import android.Manifest;
 import android.app.Activity;

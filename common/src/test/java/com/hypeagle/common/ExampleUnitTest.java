@@ -1,4 +1,4 @@
-package com.example.runtimepermission;
+package com.hypeagle.common;
 
 import org.junit.Test;
 

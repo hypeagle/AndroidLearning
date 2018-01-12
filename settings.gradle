@@ -1,1 +1,1 @@
-include ':app', ':runtimepermission'
+include ':app', ':runtimepermission', ':common', ':compression'
