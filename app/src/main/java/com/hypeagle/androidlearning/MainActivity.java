@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "picture length = " + fileContent.length);
                 String encodeFileContent = Base64.encodeToString(fileContent, Base64.DEFAULT);
                 Log.d(TAG, "encodeFileContent length = " + encodeFileContent.length());
-                byte[] compressData = CompressUtils.compressForGzip(encodeFileContent);
+                byte[] compressData = CompressUtils.compressForLZMA(encodeFileContent);
+                assert compressData != null;
                 Log.d(TAG, "compressData length = " + compressData.length);
                 String encodeCompressData = Base64.encodeToString(compressData, Base64.DEFAULT);
                 Log.d(TAG, "encodeCompressData length = " + encodeCompressData.length());
