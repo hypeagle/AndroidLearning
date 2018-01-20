@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hypeagle.bluetooth.activity.BleActivity;
 import com.hypeagle.common.utils.FileUtils;
 import com.hypeagle.compression.CompressUtils;
 
@@ -42,22 +43,25 @@ public class MainActivity extends AppCompatActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File outputImage = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), System.currentTimeMillis() + ".jpg");
-                try {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
+//                File outputImage = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), System.currentTimeMillis() + ".jpg");
+//                try {
+//                    if (outputImage.exists()) {
+//                        outputImage.delete();
+//                    }
+//
+//                    outputImage.createNewFile();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                mImageUri = Uri.fromFile(outputImage);
+//
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+//                startActivityForResult(intent, TAKE_PHOTO);
 
-                    outputImage.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                mImageUri = Uri.fromFile(outputImage);
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                startActivityForResult(intent, TAKE_PHOTO);
+                Intent intent = new Intent(MainActivity.this, BleActivity.class);
+                startActivity(intent);
             }
         });
     }
