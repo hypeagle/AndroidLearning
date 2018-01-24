@@ -1,16 +1,19 @@
 package com.hypeagle.bluetooth.activity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.hypeagle.bluetooth.R;
 import com.hypeagle.bluetooth.sevice.BleService;
@@ -19,6 +22,10 @@ import java.lang.ref.WeakReference;
 
 public class BleActivity extends AppCompatActivity {
     private static final String TAG = "BleActivity";
+
+    private static final int ENABLE_BT = 1;
+
+    private BleService.State mState = BleService.State.UNKNOWN;
 
     private final Messenger mMessenger;
 
@@ -37,7 +44,6 @@ public class BleActivity extends AppCompatActivity {
                 } else {
                     mService = null;
                 }
-
             } catch (RemoteException e) {
                 e.printStackTrace();
                 mService = null;
@@ -62,6 +68,20 @@ public class BleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ble);
+
+        TextView tv = (TextView) findViewById(R.id.ble_text);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+                BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+                if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+                    enableBluetooth();
+                } else {
+                    startScan();
+                }
+            }
+        });
 
         mServiceIntent = new Intent(this, BleService.class);
     }
@@ -94,6 +114,48 @@ public class BleActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ENABLE_BT) {
+            if (resultCode == RESULT_OK) {
+
+            } else {
+                finish();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void enableBluetooth() {
+        Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(intent, ENABLE_BT);
+    }
+
+    private void startScan() {
+        Message message = Message.obtain(null, BleService.MSG_START_SCAN);
+        if (message != null) {
+            try {
+                mService.send(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                unbindService(mServiceConnection);
+            }
+        }
+    }
+
+    private void stateChanged(BleService.State state) {
+        mState = state;
+        switch (mState) {
+            case IDLE:
+                break;
+
+            case BLUETOOTH_OFF:
+                enableBluetooth();
+                break;
+        }
+    }
+
     private static class IncomingHandler extends Handler {
         private final WeakReference<BleActivity> mActivity;
 
@@ -105,7 +167,11 @@ public class BleActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             BleActivity activity = mActivity.get();
             if (activity != null) {
-//                TODO: do something
+                switch (msg.what) {
+                    case BleService.MSG_STATE_CHANGED:
+                        activity.stateChanged(BleService.State.values()[msg.arg1]);
+                        break;
+                }
             }
             super.handleMessage(msg);
         }
