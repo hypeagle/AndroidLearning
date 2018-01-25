@@ -3,8 +3,12 @@ package com.hypeagle.bluetooth.sevice;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -21,10 +25,15 @@ import java.util.Map;
 public class BleService extends Service implements BluetoothAdapter.LeScanCallback {
     private static final String TAG = "BleService";
 
+    public static final String KEY_MAC_ADDRESSES = "KEY_MAC_ADDRESSES";
+
     public final static int MSG_REGISTER = 1;
     public final static int MSG_UNREGISTER = 2;
     public final static int MSG_START_SCAN = 3;
     public final static int MSG_STATE_CHANGED = 4;
+    public final static int MSG_DEVICE_FOUND = 5;
+    public final static int MSG_DEVICE_CONNECT = 6;
+    public final static int MSG_DEVICE_DISCONNECT = 7;
 
     private static final long SCAN_PERIOD = 3000;
 
@@ -78,6 +87,17 @@ public class BleService extends Service implements BluetoothAdapter.LeScanCallba
     @Override
     public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
         if (device != null && device.getName() != null) {
+            mDevices.put(device.getAddress(), device);
+
+            Message message = Message.obtain(null, MSG_DEVICE_FOUND);
+            if (message != null) {
+                Bundle bundle = new Bundle();
+                String[] addresses = mDevices.keySet().toArray(new String[mDevices.size()]);
+                bundle.putStringArray(KEY_MAC_ADDRESSES, addresses);
+                message.setData(bundle);
+                sendMessage(message);
+            }
+
             Log.d(TAG, "[---HYP---] " + device.getName() + ": " + device.getAddress());
         }
     }
@@ -93,6 +113,7 @@ public class BleService extends Service implements BluetoothAdapter.LeScanCallba
     }
 
     private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothGatt mBluetoothGatt;
     private State mState = State.UNKNOWN;
 
     public BleService() {
@@ -128,6 +149,37 @@ public class BleService extends Service implements BluetoothAdapter.LeScanCallba
         }
     }
 
+    private void connect(String macAddress) {
+        BluetoothDevice bluetoothDevice = mDevices.get(macAddress);
+        if (bluetoothDevice != null) {
+            mBluetoothGatt = bluetoothDevice.connectGatt(this, true, mBluetoothGattCallback);
+        }
+    }
+
+    private BluetoothGattCallback mBluetoothGattCallback = new BluetoothGattCallback() {
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            super.onConnectionStateChange(gatt, status, newState);
+            if (newState == BluetoothProfile.STATE_CONNECTED) {
+                setState(State.CONNECTED);
+                mBluetoothGatt.discoverServices();
+            } else {
+                setState(State.IDLE);
+            }
+        }
+
+        @Override
+        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            /*
+             * It is important to check the status value in the callback method as sometimes it will be called during the service discovery but before it has actually been completed.
+             * Checking for GATT_SUCCESS will ensure that we only proceed once the service discovery has actually completed.
+             */
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.d(TAG, "onServicesDiscovered: success.");
+            }
+        }
+    };
+
     /**
      * Warning: non-static inner class maybe leaking memory. [Context leak]
      * A non-static inner class can hold a reference to the instance of its containing class as it has direct access to its fields and methods.
@@ -155,12 +207,27 @@ public class BleService extends Service implements BluetoothAdapter.LeScanCallba
 
                     case MSG_UNREGISTER:
                         service.mClients.remove(msg.replyTo);
+                        if (service.mState == State.CONNECTED && service.mBluetoothGatt != null) {
+                            service.mBluetoothGatt.disconnect();
+                        }
                         Log.d(TAG, "[---HYP---] Unegistered.");
                         break;
 
                     case MSG_START_SCAN:
                         service.startScan();
                         Log.d(TAG, "[---HYP---] Start scan.");
+                        break;
+
+                    case MSG_DEVICE_CONNECT:
+                        service.connect((String) msg.obj);
+                        Log.d(TAG, "[---HYP---] Connect.");
+                        break;
+
+                    case MSG_DEVICE_DISCONNECT:
+                        if (service.mState == State.CONNECTED && service.mBluetoothGatt != null) {
+                            service.mBluetoothGatt.disconnect();
+                        }
+                        Log.d(TAG, "[---HYP---] Disconnect.");
                         break;
 
                     default:

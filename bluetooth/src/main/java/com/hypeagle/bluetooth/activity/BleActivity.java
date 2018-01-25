@@ -118,7 +118,7 @@ public class BleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ENABLE_BT) {
             if (resultCode == RESULT_OK) {
-
+                startScan();
             } else {
                 finish();
             }
