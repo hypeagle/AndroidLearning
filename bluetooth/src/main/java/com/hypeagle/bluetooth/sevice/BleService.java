@@ -173,6 +173,8 @@ public class BleService extends Service implements BluetoothAdapter.LeScanCallba
             /*
              * It is important to check the status value in the callback method as sometimes it will be called during the service discovery but before it has actually been completed.
              * Checking for GATT_SUCCESS will ensure that we only proceed once the service discovery has actually completed.
+             *
+             * BLE command must executed one by one. If not, many strange issues may happen such as packet drop, gatt 133
              */
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Log.d(TAG, "onServicesDiscovered: success.");
