@@ -3,22 +3,19 @@ package com.hypeagle.androidlearning;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hypeagle.bluetooth.activity.BleActivity;
+import com.anyhunter.app.location.GPSActivity;
 import com.hypeagle.common.utils.FileUtils;
 import com.hypeagle.compression.CompressUtils;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "[---HYP---]";
@@ -60,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
 //                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
 //                startActivityForResult(intent, TAKE_PHOTO);
 
-                Intent intent = new Intent(MainActivity.this, BleActivity.class);
+//                Intent intent = new Intent(MainActivity.this, BleActivity.class);
+//                startActivity(intent);
+
+                Intent intent = new Intent(MainActivity.this, GPSActivity.class);
                 startActivity(intent);
             }
         });

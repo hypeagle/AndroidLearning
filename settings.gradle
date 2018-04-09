@@ -1,1 +1,1 @@
-include ':app', ':runtimepermission', ':common', ':compression', ':bluetooth'
+include ':app', ':runtimepermission', ':common', ':compression', ':bluetooth', ':location'
