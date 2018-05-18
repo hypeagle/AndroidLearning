@@ -23,13 +23,15 @@ public class GPSUtils {
     private LocationManager mLocationManager = null;
 
     private LocationListener mLocationListener = new LocationListener() {
-
         @Override
         public void onLocationChanged(Location location) {
-            Log.d(TAG, "onLocationChanged: [位置发生变化]");
-            if (location != null) {
-                GPSActivity.sGPSActivity.updateTV(location);
-            }
+            Log.d(TAG, "onLocationChanged: [获取新的位置] ");
+            Log.d(TAG, "onLocationChanged: [纬度] " + location.getLatitude());
+            Log.d(TAG, "onLocationChanged: [经度] " + location.getLongitude());
+            Log.d(TAG, "onLocationChanged: [海拔] " + location.getAltitude());
+            Log.d(TAG, "onLocationChanged: [速度] " + location.getSpeed());
+            Log.d(TAG, "onLocationChanged: [方位] " + location.getBearing());
+            Log.d(TAG, "onLocationChanged: [时间] " + location.getTime());
         }
 
         @Override
@@ -51,10 +53,6 @@ public class GPSUtils {
 
         @Override
         public void onProviderEnabled(String provider) {
-            if (mLocationManager != null) {
-                @SuppressLint("MissingPermission") Location location = mLocationManager.getLastKnownLocation(provider);
-                GPSActivity.sGPSActivity.updateTV(location);
-            }
             Log.d(TAG, "onProviderEnabled: [GPS 开启]");
         }
 
@@ -138,26 +136,31 @@ public class GPSUtils {
 
             mLocationManager.addGpsStatusListener(mListener);
 
-
-            // 绑定监听，有4个参数
-            // 参数1，设备：有GPS_PROVIDER和NETWORK_PROVIDER两种
-            // 参数2，位置信息更新周期，单位毫秒
-            // 参数3，位置变化最小距离：当位置距离变化超过此值时，将更新位置信息
-            // 参数4，监听
-            // 备注：参数2和3，如果参数3不为0，则以参数3为准；参数3为0，则通过时间来定时更新；两者为0，则随时刷新
-
-            // 1秒更新一次，或最小位移变化超过1米更新一次；
-            // 注意：此处更新准确度非常低，推荐在service里面启动一个Thread，在run中sleep(10000);然后执行handler.sendMessage(),更新位置
-            List<String> locationProviders = mLocationManager.getProviders(true);
-
-            if (locationProviders.contains(LocationManager.GPS_PROVIDER)) {
-                Log.d(TAG, "startLocate: [有GPS定位]");
-                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
+            String provider = mLocationManager.getBestProvider(getCriteria(), true);
+            if (provider != null) {
+                mLocationManager.requestLocationUpdates(provider, 1000, 0, mLocationListener);
             }
-            if (locationProviders.contains(LocationManager.NETWORK_PROVIDER)) {
-                Log.d(TAG, "startLocate: [有网络定位]");
-                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 0, mLocationListener);
-            }
+
+
+//             绑定监听，有4个参数
+//             参数1，设备：有GPS_PROVIDER和NETWORK_PROVIDER两种
+//             参数2，位置信息更新周期，单位毫秒
+//             参数3，位置变化最小距离：当位置距离变化超过此值时，将更新位置信息
+//             参数4，监听
+//             备注：参数2和3，如果参数3不为0，则以参数3为准；参数3为0，则通过时间来定时更新；两者为0，则随时刷新
+//
+//             1秒更新一次，或最小位移变化超过1米更新一次；
+//             注意：此处更新准确度非常低，推荐在service里面启动一个Thread，在run中sleep(10000);然后执行handler.sendMessage(),更新位置
+//            List<String> locationProviders = mLocationManager.getProviders(true);
+//
+//            if (locationProviders.contains(LocationManager.GPS_PROVIDER)) {
+//                Log.d(TAG, "startLocate: [有GPS定位]");
+//                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener);
+//            }
+//            if (locationProviders.contains(LocationManager.NETWORK_PROVIDER)) {
+//                Log.d(TAG, "startLocate: [有网络定位]");
+//                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 0, mLocationListener);
+//            }
         }
     }
 
@@ -166,13 +169,13 @@ public class GPSUtils {
         // 设置定位精确度 Criteria.ACCURACY_COARSE比较粗略，Criteria.ACCURACY_FINE则比较精细
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         // 设置是否要求速度
-        criteria.setSpeedRequired(false);
+        criteria.setSpeedRequired(true);
         // 设置是否允许运营商收费
         criteria.setCostAllowed(false);
         // 设置是否需要方位信息
-        criteria.setBearingRequired(false);
+        criteria.setBearingRequired(true);
         // 设置是否需要海拔信息
-        criteria.setAltitudeRequired(false);
+        criteria.setAltitudeRequired(true);
         // 设置对电源的需求
         criteria.setPowerRequirement(Criteria.POWER_LOW);
         return criteria;
