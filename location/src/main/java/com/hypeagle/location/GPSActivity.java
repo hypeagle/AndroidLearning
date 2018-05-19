@@ -1,4 +1,4 @@
-package com.anyhunter.app.location;
+package com.hypeagle.location;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

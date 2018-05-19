@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.anyhunter.app.location.GPSActivity;
 import com.hypeagle.common.utils.FileUtils;
 import com.hypeagle.compression.CompressUtils;
+import com.hypeagle.location.GPSActivity;
 
 import java.io.File;
 
