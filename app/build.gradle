@@ -39,4 +39,5 @@ dependencies {
     implementation project(path: ':compression')
     implementation project(path: ':bluetooth')
     implementation project(path: ':location')
+    implementation project(path: ':notification')
 }

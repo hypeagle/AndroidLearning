@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.hypeagle.common.utils.FileUtils;
 import com.hypeagle.compression.CompressUtils;
 import com.hypeagle.location.GPSActivity;
+import com.hypeagle.notification.NotificationBuilder;
 
 import java.io.File;
 
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, GPSActivity.class);
                 startActivity(intent);
+
+                new NotificationBuilder(MainActivity.this).sendNotification(NotificationBuilder.IMPORTANT_CHANNEL_ID, "hyp", "我想告诉你");
             }
         });
     }
