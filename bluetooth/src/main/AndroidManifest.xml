@@ -7,12 +7,12 @@
 
     <application>
         <service
-            android:name=".sevice.BleService"
+            android:name="com.stylingandroid.ble.BleService"
             android:enabled="true"
             android:exported="false">
         </service>
 
-        <activity android:name=".activity.BleActivity">
+        <activity android:name="com.stylingandroid.ble.BleActivity">
         </activity>
     </application>
 

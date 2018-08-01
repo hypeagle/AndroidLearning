@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.hypeagle.common.utils.FileUtils;
 import com.hypeagle.compression.CompressUtils;
-import com.hypeagle.location.GPSActivity;
-import com.hypeagle.notification.NotificationBuilder;
+import com.stylingandroid.ble.BleActivity;
 
 import java.io.File;
 
@@ -58,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 //                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
 //                startActivityForResult(intent, TAKE_PHOTO);
 
-//                Intent intent = new Intent(MainActivity.this, BleActivity.class);
-//                startActivity(intent);
-
-                Intent intent = new Intent(MainActivity.this, GPSActivity.class);
+                Intent intent = new Intent(MainActivity.this, BleActivity.class);
                 startActivity(intent);
 
-                new NotificationBuilder(MainActivity.this).sendNotification(NotificationBuilder.IMPORTANT_CHANNEL_ID, "hyp", "我想告诉你");
+//                Intent intent = new Intent(MainActivity.this, GPSActivity.class);
+//                startActivity(intent);
+//
+//                new NotificationBuilder(MainActivity.this).sendNotification(NotificationBuilder.IMPORTANT_CHANNEL_ID, "hyp", "我想告诉你");
             }
         });
     }
