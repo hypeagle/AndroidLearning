@@ -1,4 +1,4 @@
-package com.anyhunter.app.notification;
+package com.hypeagle.app.notification;
 
 import org.junit.Test;
 

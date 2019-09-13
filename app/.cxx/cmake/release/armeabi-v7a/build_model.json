@@ -1,0 +1,72 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "D:\\GitWorks\\AndroidLearning",
+      "sdkFolder": "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\GitWorks\\AndroidLearning\\app",
+      "makeFile": "D:\\GitWorks\\AndroidLearning\\app\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "D:\\GitWorks\\AndroidLearning\\.cxx",
+      "cxxFolder": "D:\\GitWorks\\AndroidLearning\\app\\.cxx",
+      "ndkFolder": "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\ndk-bundle",
+      "ndkVersion": "20.0.5594570",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [
+      ""
+    ],
+    "variantName": "release",
+    "soFolder": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates\\cmake\\release\\lib",
+    "objFolder": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates\\cmake\\release\\obj",
+    "jsonFolder": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release",
+    "gradleBuildOutputFolder": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 22,
+  "cxxBuildFolder": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a",
+  "jsonFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a",
+  "objFolder": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a",
+  "buildCommandFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\build_command.txt",
+  "buildOutputFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\build_output.txt",
+  "modelOutputFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\CMakeLists.txt",
+    "toolchainWrapperFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\build_generation_state.json",
+    "cacheKeyFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\compiler_cache_key.json",
+    "compilerCacheUseFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\compiler_cache_use.json",
+    "compilerCacheWriteFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cxx\\release\\armeabi-v7a\\compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\json_generation_record.json",
+  "compileCommandsJsonFile": "D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a\\compile_commands.json"
+}

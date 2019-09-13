@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "D:\\GitWorks\\AndroidLearning\\app\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\x86_64 --target clean"
+  ],
+  "libraries": {
+    "learning-Release-x86_64": {
+      "artifactName": "learning",
+      "buildCommand": "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\x86_64 --target learning",
+      "abi": "x86_64",
+      "output": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates\\cmake\\release\\obj\\x86_64\\liblearning.so"
+    }
+  }
+}

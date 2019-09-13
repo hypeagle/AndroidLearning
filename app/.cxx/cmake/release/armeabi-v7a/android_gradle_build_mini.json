@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "D:\\GitWorks\\AndroidLearning\\app\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a --target clean"
+  ],
+  "libraries": {
+    "learning-Release-armeabi-v7a": {
+      "artifactName": "learning",
+      "buildCommand": "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\armeabi-v7a --target learning",
+      "abi": "armeabi-v7a",
+      "output": "D:\\GitWorks\\AndroidLearning\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\liblearning.so"
+    }
+  }
+}

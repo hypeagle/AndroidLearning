@@ -1,0 +1,38 @@
+
+{
+	"buildFiles" : [ "D:/GitWorks/AndroidLearning/app/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\arm64-v8a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"learning-Release-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "learning",
+			"buildCommand" : "C:\\Users\\hypea\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\GitWorks\\AndroidLearning\\app\\.cxx\\cmake\\release\\arm64-v8a --target learning",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=aarch64-none-linux-android22 --gcc-toolchain=C:/Users/hypea/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/hypea/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dlearning_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O2 -DNDEBUG  -fPIC    -c ",
+					"src" : "D:/GitWorks/AndroidLearning/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "D:/GitWorks/AndroidLearning/app/.cxx/cmake/release/arm64-v8a"
+				}
+			],
+			"output" : "D:/GitWorks/AndroidLearning/app/build/intermediates/cmake/release/obj/arm64-v8a/liblearning.so",
+			"toolchain" : "2501773209"
+		}
+	},
+	"toolchains" : 
+	{
+		"2501773209" : 
+		{
+			"cCompilerExecutable" : "C:/Users/hypea/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/hypea/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

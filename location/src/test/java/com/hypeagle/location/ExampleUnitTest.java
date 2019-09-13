@@ -1,4 +1,4 @@
-package com.anyhunter.app.location;
+package com.hypeagle.app.location;
 
 import org.junit.Test;
 
